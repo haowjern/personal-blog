@@ -12,7 +12,7 @@ type Props = {
 const name = "Your Name";
 export const siteTitle = "Next.js Sample Website";
 
-export default function Layout({ children, home }: Props) {
+export default function Layout({ children, home }: Props): React.ReactElement {
   return (
     <div className={styles.container}>
       <Head>

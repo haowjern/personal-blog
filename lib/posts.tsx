@@ -3,13 +3,14 @@ import path from "path";
 import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
+import { PostDataProps, PostPathProps } from "../models/posts";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
-export function getSortedPostsData() {
+export function getSortedPostsData(): PostDataProps[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
+  const allPostsData: PostDataProps[] = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, "");
 
@@ -26,7 +27,7 @@ export function getSortedPostsData() {
       ...matterResult.data,
     };
   });
-  // @ts-ignore
+
   // Sort posts by date
   return allPostsData.sort(({ date: a }, { date: b }) => {
     if (a < b) {
@@ -39,7 +40,7 @@ export function getSortedPostsData() {
   });
 }
 
-export function getAllPostIds() {
+export function getAllPostIds(): PostPathProps[] {
   const fileNames = fs.readdirSync(postsDirectory);
 
   // Returns an array that looks like this:
@@ -64,7 +65,7 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id: string) {
+export async function getPostData(id: string): Promise<unknown> {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 

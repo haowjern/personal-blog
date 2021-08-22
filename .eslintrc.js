@@ -28,6 +28,7 @@ module.exports = {
 			"error",
 			"always",
 		],
+		"@typescript-eslint/explicit-module-boundary-types": "off",
 	},
 	ignorePatterns: ["out", ".next"],
 };
