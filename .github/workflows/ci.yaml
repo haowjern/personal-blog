@@ -1,7 +1,6 @@
 name: ci
 
-on:
-  pull_request:
+on: [pull_request]
 
 jobs:
   ci:
@@ -22,6 +21,6 @@ jobs:
 
       - name: Run Eslint
         run: npx eslint --max-warnings 0 .
-        
+
       - name: Build project
         run: yarn build
