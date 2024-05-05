@@ -3,7 +3,7 @@ import {
   PortableTextListComponent,
   PortableTextReactComponents,
 } from "@portabletext/react";
-import { getPost, getPostHeadings, getPostSlugs } from "../../sanity/query";
+import { getPost, getPostSlugs } from "../../sanity/query";
 import { formatDate, urlFor } from "../../utils";
 import { getImageDimensions } from "@sanity/asset-utils";
 
@@ -63,8 +63,7 @@ export async function generateStaticParams() {
 // TODO: Add table of contents
 export default async function Post({ params }) {
   const { slug = "" } = params;
-  const post = await getPost(slug);
-  const postHeadings = await getPostHeadings();
+  const post = await getPost(slug); 
 
   return (
     <section>

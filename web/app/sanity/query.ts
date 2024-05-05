@@ -22,17 +22,6 @@ export async function getPostSlugs(): Promise<string[]> {
   });
 }
 
-export async function getPostHeadings(): Promise<string[]> {
-  const res = await sanityFetch({
-    query: groq`*[ _type == "post" && defined(slug.current)][].slug.current ] {
-      body,
-      "headings": body[length(style) == 2 && string::startsWith(style, "h")]
-    }`,
-  });
-
-  return res.headings ? res.headings : [];
-}
-
 export async function getPostsSorted(): Promise<PostType[]> {
   return await sanityFetch({
     query: groq`*[_type == "post" && publishedAt < now()] | order(publishedAt desc)`,
