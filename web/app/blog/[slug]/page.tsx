@@ -1,30 +1,29 @@
 import {
   PortableText,
   PortableTextListComponent,
+  PortableTextMarkComponent,
   PortableTextReactComponents,
 } from "@portabletext/react";
 import { getPost, getPostSlugs } from "../../sanity/query";
 import { formatDate, urlFor } from "../../utils";
 import { getImageDimensions } from "@sanity/asset-utils";
+import Image from "next/image";
+import Link from "next/link";
+
+// TODO: setup sanity studio
+// TODO: get domain name registered and point some links here
+// TODO: improve tap target sizes
 
 const imageComponent = ({ value, isInline }) => {
   const { width, height } = getImageDimensions(value);
   return (
-    <img
-      src={urlFor(value)
-        .width(isInline ? 100 : 800)
-        .fit("max")
-        .auto("format")
-        .url()}
+    <Image
+      src={urlFor(value).url()}
+      width={width}
+      height={height}
       alt={value.alt || " "}
       loading="lazy"
-      style={{
-        // Display alongside text if image appears inside a block text span
-        display: isInline ? "inline-block" : "block",
-
-        // Avoid jumping around with aspect-ratio CSS property
-        aspectRatio: width / height,
-      }}
+      className={isInline ? "inline-block" : "block"}
     />
   );
 };
@@ -48,7 +47,24 @@ const listComponent: PortableTextListComponent = ({ value, children }) => {
   }
 };
 
+const linkComponent: PortableTextMarkComponent = ({ value, children }) => {
+  const target = (value?.href || "").startsWith("http") ? "_blank" : undefined;
+  return (
+    <Link
+      href={value.href}
+      target={target}
+      rel={target === "_blank" && "noindex no follow"}
+      className="text-blue-300 visited:text-purple-500"
+    >
+      {children}
+    </Link>
+  );
+};
+
 const portableTextComponents: Partial<PortableTextReactComponents> = {
+  marks: {
+    link: linkComponent,
+  },
   types: {
     image: imageComponent,
   },
@@ -63,7 +79,7 @@ export async function generateStaticParams() {
 // TODO: Add table of contents
 export default async function Post({ params }) {
   const { slug = "" } = params;
-  const post = await getPost(slug); 
+  const post = await getPost(slug);
 
   return (
     <section>

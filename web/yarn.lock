@@ -2235,11 +2235,6 @@
   dependencies:
     server-only "^0.0.1"
 
-"@vercel/speed-insights@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.npmjs.org/@vercel/speed-insights/-/speed-insights-1.0.10.tgz"
-  integrity sha512-4uzdKB0RW6Ff2FkzshzjZ+RlJfLPxgm/00i0XXgxfMPhwnnsk92YgtqsxT9OcPLdJUyVU1DqFlSWWjIQMPkh0g==
-
 "@vitejs/plugin-react@^4.2.1":
   version "4.2.1"
   resolved "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-4.2.1.tgz"

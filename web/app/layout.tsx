@@ -4,18 +4,19 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Navbar } from "./components/nav";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Tee Haow Jern",
-  description: "Tee Haow Jern's Blog",
+  title: "Tee Haow Jern's Blog",
+  description:
+    "A blog where Tee Haow Jern, a software engineer based in Malaysia shares his thoughts on coding and volleyball.",
   openGraph: {
-    title: "Tee Haow Jern",
-    description: "Tee Haow Jern's Blog",
+    title: "Tee Haow Jern's Blog",
+    description:
+      "A blog where Tee Haow Jern, a software engineer based in Malaysia shares his thoughts on coding and volleyball.",
     url: BASE_URL,
     siteName: "Tee Haow Jern",
     locale: "en_GB",
@@ -24,13 +25,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
 };
 
@@ -56,7 +50,6 @@ export default function RootLayout({
           {children}
           <Footer />
           <Analytics />
-          <SpeedInsights />
         </main>
       </body>
     </html>
