@@ -6,11 +6,12 @@ export async function getPost(slug: string): Promise<PostType> {
   return await sanityFetch({
     query: groq`*[_type == "post" && slug.current == $slug][0]{
     title,
+    body,
+    publishedAt,
     "name": author->name,
     "categories": categories[]->title,
     "authorImage": author->image,
-    body,
-    publishedAt
+    "headings": body[length(style) == 2 && string::startsWith(style, "h")]
   }`,
     params: { slug },
   });

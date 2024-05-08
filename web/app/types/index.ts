@@ -1,7 +1,7 @@
 // types/index.ts
 
 import { SanityImageSource } from "@sanity/asset-utils";
-import { PortableTextBlock } from "sanity";
+import { PortableTextBlock, PortableTextTextBlock } from "sanity";
 
 export type PostType = {
   _id: string;
@@ -17,6 +17,7 @@ export type PostType = {
     current: string;
   };
   publishedAt: string;
+  headings: PortableTextTextBlock[];
 };
 
 export type AuthorType = {

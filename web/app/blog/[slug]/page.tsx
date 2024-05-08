@@ -10,6 +10,7 @@ import { formatDate, urlFor } from "../../utils";
 import { getImageDimensions } from "@sanity/asset-utils";
 import Image from "next/image";
 import Link from "next/link";
+import TableOfContents from "../../components/tableOfContents";
 
 const imageComponent = ({ value, isInline }) => {
   const { width, height } = getImageDimensions(value);
@@ -150,6 +151,7 @@ export default async function Post({ params }) {
           {formatDate(post.publishedAt)}
         </p>
       </div>
+      <TableOfContents headings={post.headings}/>
       <article className="prose">
         <PortableText value={post.body} components={portableTextComponents} />
       </article>
