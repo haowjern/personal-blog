@@ -1,5 +1,6 @@
 import {
   PortableText,
+  PortableTextBlockComponent,
   PortableTextListComponent,
   PortableTextMarkComponent,
   PortableTextReactComponents,
@@ -9,12 +10,6 @@ import { formatDate, urlFor } from "../../utils";
 import { getImageDimensions } from "@sanity/asset-utils";
 import Image from "next/image";
 import Link from "next/link";
-
-// TODO: setup sanity studio
-// TODO: get domain name registered and point some links here
-// TODO: improve tap target sizes
-// TODO: fix alt image?
-// TODO: add table of content
 
 const imageComponent = ({ value, isInline }) => {
   const { width, height } = getImageDimensions(value);
@@ -63,6 +58,67 @@ const linkComponent: PortableTextMarkComponent = ({ value, children }) => {
   );
 };
 
+const LinkContent = ({ id, children }) => {
+  return (
+    <>
+      <a href={`#${id}`} aria-hidden="true" tabIndex={-1}>
+        {children}
+      </a>
+    </>
+  );
+};
+
+const blockComponent: Record<string, PortableTextBlockComponent> = {
+  h1: ({ children }) => {
+    const id = children[0].toLowerCase().replace(/\s+/g, "-");
+    return (
+      <h1 id={id}>
+        <LinkContent id={id}>{children}</LinkContent>
+      </h1>
+    );
+  },
+  h2: ({ children }) => {
+    const id = children[0].toLowerCase().replace(/\s+/g, "-");
+    return (
+      <h2 id={id}>
+        <LinkContent id={id}>{children}</LinkContent>
+      </h2>
+    );
+  },
+  h3: ({ children }) => {
+    const id = children[0].toLowerCase().replace(/\s+/g, "-");
+    return (
+      <h3 id={id}>
+        <LinkContent id={id}>{children}</LinkContent>
+      </h3>
+    );
+  },
+  h4: ({ children }) => {
+    const id = children[0].toLowerCase().replace(/\s+/g, "-");
+    return (
+      <h4 id={id}>
+        <LinkContent id={id}>{children}</LinkContent>
+      </h4>
+    );
+  },
+  h5: ({ children }) => {
+    const id = children[0].toLowerCase().replace(/\s+/g, "-");
+    return (
+      <h5 id={id}>
+        <LinkContent id={id}>{children}</LinkContent>
+      </h5>
+    );
+  },
+  h6: ({ children }) => {
+    const id = children[0].toLowerCase().replace(/\s+/g, "-");
+    return (
+      <h6 id={id}>
+        <LinkContent id={id} children={children} />
+      </h6>
+    );
+  },
+};
+
 const portableTextComponents: Partial<PortableTextReactComponents> = {
   marks: {
     link: linkComponent,
@@ -71,6 +127,7 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
     image: imageComponent,
   },
   list: listComponent,
+  block: blockComponent,
 };
 
 export async function generateStaticParams() {
