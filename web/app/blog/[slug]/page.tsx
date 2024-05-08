@@ -51,7 +51,6 @@ const linkComponent: PortableTextMarkComponent = ({ value, children }) => {
     <Link
       href={value.href}
       target={target}
-      rel={target === "_blank" && "noindex no follow"}
       className="text-blue-300 visited:text-purple-500"
     >
       {children}
