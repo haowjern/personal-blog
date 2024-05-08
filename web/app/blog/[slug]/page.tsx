@@ -13,6 +13,8 @@ import Link from "next/link";
 // TODO: setup sanity studio
 // TODO: get domain name registered and point some links here
 // TODO: improve tap target sizes
+// TODO: fix alt image?
+// TODO: add table of content
 
 const imageComponent = ({ value, isInline }) => {
   const { width, height } = getImageDimensions(value);
