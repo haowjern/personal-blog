@@ -24,6 +24,7 @@ export type PostType = {
 export type AuthorType = {
   _id: string;
   name: string;
+  description: string;
   slug: {
     current: string;
   };
