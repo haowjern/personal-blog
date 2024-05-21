@@ -4,13 +4,13 @@ import Image from "next/image";
 import { urlFor } from "../utils";
 import { getImageDimensions } from "@sanity/asset-utils";
 
-export default async function Profile() {
+export default async function Profile({ title }) {
   const mainAuthor = await getMainAuthor();
   const imageDimensions = getImageDimensions(mainAuthor.image);
 
   return (
     <>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">About Me</h1>
+      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">{title}</h1>
       <div className="grid place-items-center my-4">
         <Image
           src={urlFor(mainAuthor.image).url()}

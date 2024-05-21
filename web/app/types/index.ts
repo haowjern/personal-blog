@@ -6,6 +6,7 @@ import { PortableTextBlock, PortableTextTextBlock } from "sanity";
 export type PostType = {
   _id: string;
   title: string;
+  description: string;
   name: string;
   categories: string[];
   authorImage: {

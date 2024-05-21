@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getPostsSorted } from "../sanity/query";
 import { formatDate } from "../utils";
+import { Metadata, ResolvingMetadata } from "next";
 
 export async function Posts() {
   const posts = await getPostsSorted();

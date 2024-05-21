@@ -17,6 +17,18 @@ export async function getPost(slug: string): Promise<PostType> {
   });
 }
 
+export async function getPostTitleAndDescription(
+  slug: string
+): Promise<Pick<PostType, "title" | "description">> {
+  return await sanityFetch({
+    query: groq`*[_type == "post" && slug.current == $slug][0]{
+    title,
+    description
+  }`,
+    params: { slug },
+  });
+}
+
 export async function getPostSlugs(): Promise<string[]> {
   return await sanityFetch({
     query: groq`*[_type == "post" && defined(slug.current)][].slug.current`,

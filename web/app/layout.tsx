@@ -8,20 +8,18 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const title = "Tee Haow Jern's Blog";
+const description =
+  "A blog by Tee Haow Jern, a software engineer based in Malaysia, sharing his thoughts on coding and volleyball.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Tee Haow Jern's Blog",
-  description:
-    "A blog where Tee Haow Jern, a software engineer based in Malaysia shares his thoughts on coding and volleyball.",
+  title,
+  description,
   openGraph: {
-    title: "Tee Haow Jern's Blog",
-    description:
-      "A blog where Tee Haow Jern, a software engineer based in Malaysia shares his thoughts on coding and volleyball.",
+    title,
+    description,
     url: BASE_URL,
-    siteName: "Tee Haow Jern",
-    locale: "en_GB",
-    type: "website",
   },
   robots: {
     index: true,

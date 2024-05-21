@@ -5,12 +5,17 @@ import {
   PortableTextMarkComponent,
   PortableTextReactComponents,
 } from "@portabletext/react";
-import { getPost, getPostSlugs } from "../../sanity/query";
+import {
+  getPost,
+  getPostSlugs,
+  getPostTitleAndDescription,
+} from "../../sanity/query";
 import { formatDate, urlFor } from "../../utils";
 import { getImageDimensions } from "@sanity/asset-utils";
 import Image from "next/image";
 import Link from "next/link";
 import TableOfContents from "../../components/tableOfContents";
+import { Metadata, ResolvingMetadata } from "next";
 
 const imageComponent = ({ value, isInline }) => {
   const { width, height } = getImageDimensions(value);
@@ -135,7 +140,33 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-// TODO: Add table of contents
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = params.slug;
+
+  const { title, description } = await getPostTitleAndDescription(slug);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `/blog/${slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
 export default async function Post({ params }) {
   const { slug = "" } = params;
   const post = await getPost(slug);
@@ -150,7 +181,7 @@ export default async function Post({ params }) {
           {formatDate(post.publishedAt)}
         </p>
       </div>
-      <TableOfContents headings={post.headings}/>
+      <TableOfContents headings={post.headings} />
       <article className="prose">
         <PortableText value={post.body} components={portableTextComponents} />
       </article>
